@@ -1,0 +1,12 @@
+<h1>New Brand</h1>
+
+<%= simple_form_for @brand do |f| %>
+  <%= f.input :name %> <br>
+  <%= f.input :description %> <br>
+  State <br>
+  <%= f.select :state, ['published', 'draft', 'discontinued'] %> <br> <br>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to 'Back', brands_path %>
+
