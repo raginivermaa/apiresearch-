@@ -40,30 +40,20 @@ class ProductsController < ApplicationController
     # @categories = Category.all
 
 
-    resources = []
-    @products.all.each do |product|
-      resources << ProductResource.new(product, nil)
-    end
-
     include_hash = {
         include: include_array
     }.compact
 
-    serializer = JSONAPI::ResourceSerializer.new(ProductResource, include_hash)
-    render json: serializer.serialize_to_hash(resources)
+    render json: ProductSerializer.new(@products, include_hash).serialized_json
   end
 
   def show
     @product = Product.friendly.find(params[:id])
 
-    #params[:include] = (params[:include])&.split(',') || ""
     include_hash = {
         include: params[:include]&.split(',')
     }.compact
 
-    #byebug
-    resource = ProductResource.new(@product, nil)
-    serializer = JSONAPI::ResourceSerializer.new(ProductResource, include_hash)
-    render json: serializer.serialize_to_hash(resource)
+    render json: ProductSerializer.new(@product, include_hash).serialized_json
   end
 end

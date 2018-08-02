@@ -2,29 +2,21 @@ class VariantsController < ApplicationController
   def index
     @variants = Variant.all
 
-    resources = []
-    @variants.all.each do |variant|
-      resources << VariantResource.new(variant, nil)
-    end
-
     include_hash = {
         include: params[:include]&.split(',')
     }.compact
 
-    serializer = JSONAPI::ResourceSerializer.new(VariantResource, include_hash)
-    render json: serializer.serialize_to_hash(resources)
+    render json: VariantSerializer.new(@variants, include_hash).serialized_json
   end
 
   def show
     @variant = Variant.find(params[:id])
-    resource = VariantResource.new(@variant, nil)
+    @product = @variant.product
 
     include_hash = {
         include: params[:include]&.split(',')
     }.compact
-
-    serializer = JSONAPI::ResourceSerializer.new(VariantResource, include_hash)
-    render json: serializer.serialize_to_hash(resource)
+    render json: VariantSerializer.new(@variant, include_hash).serialized_json
   end
 
   def new
@@ -59,6 +51,7 @@ class VariantsController < ApplicationController
     end
   end
 
+
   def destroy
     @variant = Variant.find(params[:id])
     @variant.destroy
@@ -66,9 +59,11 @@ class VariantsController < ApplicationController
     redirect_to variants_path
   end
 
+
   private
 
   def variant_params
     params.require(:variant).permit(:name, :sold_out, :under_sale, :price, :sale_price, :sale_text, :product_id)
   end
+
 end

@@ -11,4 +11,6 @@ class Product < ApplicationRecord
   validates :state, presence: true
   validates :description, presence: true
   validates :state, inclusion: { in: %w(draft published discontinued) }
+
+
 end

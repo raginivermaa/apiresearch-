@@ -87,5 +87,4 @@ gem 'will_paginate', '~> 3.0.7'
 gem 'api-pagination'
 gem 'ancestry'
 
-gem 'jsonapi-resources'
-#gem 'jsonapi-utils', '~> 0.7.2'
+gem 'fast_jsonapi'

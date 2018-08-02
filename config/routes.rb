@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # post ... to ...
   # put ... to ..
   # delete ... to...
-
-  get "categories/*id", to: 'categories#show'
+  #
+  # get "categories/*id", to: 'categories#show'
   #
   # #api
   # namespace 'api' do
@@ -26,18 +26,18 @@ Rails.application.routes.draw do
   #   end
   # end
   #
+  # namespace 'api' do
+  #   namespace 'v1' do
+  #     resources :categories
+  #   end
+  # end
   #
   # namespace 'api' do
   #   namespace 'v1' do
   #     resources :products
   #   end
   # end
-
-  #get "api/v1/categories/*id", to: 'api/v1/categories#show'
-
-  jsonapi_resources :categories
-  jsonapi_resources :products
-  jsonapi_resources :variants
-
+  #
+  # get "api/v1/categories/*id", to: 'api/v1/categories#show'
 
 end

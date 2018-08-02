@@ -1,7 +1,6 @@
-# class ProductSerializer < ActiveModel::Serializer
-#
-#   attributes :name, :state, :description, :category
-#   has_many :variants
-#
-# end
-#
+class ProductSerializer
+  include FastJsonapi::ObjectSerializer
+  attributes :name, :state, :description
+  has_many :variants
+  belongs_to :category
+end
